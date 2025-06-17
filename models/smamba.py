@@ -1,3 +1,6 @@
+import os, sys, pathlib
+sys.path.insert(0, os.path.dirname(pathlib.Path(__file__).parent.absolute()))
+
 import torch
 import torch.nn as nn
 from models.layers.Mamba_EncDec import Encoder, EncoderLayer
@@ -95,3 +98,19 @@ class SMamba(nn.Module):
     
     def forward(self, x_enc):
         return self.forecast(x_enc.permute(0, 2, 1))
+    
+
+
+
+if __name__ == "__main__":
+    model = SMamba(
+        num_features=8, seq_len=96, use_norm=True,
+        d_model=64, d_state=16, d_ff=128, dropout=0.1,
+        activation='gelu', e_layers=2
+    )
+    print(model)
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"Total parameters: {total_params}")
+    # 若需详细 summary，可用 torchinfo/torchsummary
+    # from torchinfo import summary
+    # summary(model, input_size=(batch_size, seq_len, num_features))

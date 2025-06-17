@@ -1,3 +1,6 @@
+import os, sys, pathlib
+sys.path.insert(0, os.path.dirname(pathlib.Path(__file__).parent.absolute()))
+
 import torch
 from torch import nn
 
@@ -29,3 +32,16 @@ class LSTM(nn.Module):
         # x = x.permute(0, 2, 1)
         # x = self.linear2(x)
         return nn.functional.tanh(x)
+
+
+if __name__ == "__main__":
+
+    model = LSTM(
+        num_features=8,    # 输入特征数
+        hidden_size=64,    # 隐藏层维度
+        num_layers=2,      # LSTM层数
+        bidirectional=False
+    )
+    print(model)
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"Total parameters: {total_params}")

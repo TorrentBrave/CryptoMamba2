@@ -1,3 +1,7 @@
+import os, sys, pathlib
+sys.path.insert(0, os.path.dirname(pathlib.Path(__file__).parent.absolute()))
+
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -89,3 +93,14 @@ class iTransformer(nn.Module):
 
     def forward(self, x_enc):
         return self.forecast(x_enc.permute(0, 2, 1))
+    
+
+
+if __name__ == "__main__":
+    model = iTransformer(
+        num_features=8, seq_len=96, pred_len=24, output_attention=False, use_norm=True,
+        d_model=64, d_ff=128, dropout=0.1, factor=5, n_heads=4, activation='gelu', e_layers=2
+    )
+    print(model)
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"Total parameters: {total_params}")

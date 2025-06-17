@@ -1,3 +1,6 @@
+import os, sys, pathlib
+sys.path.insert(0, os.path.dirname(pathlib.Path(__file__).parent.absolute()))
+
 import math
 from functools import partial
 from typing import Callable, Any
@@ -461,3 +464,23 @@ class CMamba(nn.Module):
         if self.cls:
             x = self.tanh(x)
         return x
+    
+
+if __name__ == "__main__":
+    model = CMamba(
+        num_features=8,
+        hidden_dims=[96, 64, 32, 1],  # 示例隐藏层结构，可根据实际任务调整
+        norm_layer=nn.LayerNorm,
+        d_conv=4,
+        layer_density=1,
+        expand=2,
+        mlp_ratio=0,
+        drop=0.0,
+        num_classes=None,
+        d_states=16,
+        use_checkpoint=False,
+        cls=False
+    )
+    print(model)
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"Total parameters: {total_params}")

@@ -1,3 +1,6 @@
+import os, sys, pathlib
+sys.path.insert(0, os.path.dirname(pathlib.Path(__file__).parent.absolute()))
+
 from torch import nn
 
 class GRUModel(nn.Module):
@@ -11,3 +14,14 @@ class GRUModel(nn.Module):
         output, _ = self.gru(x)
         output = self.fc(output[:, -1, :])
         return output
+    
+if __name__ == "__main__":
+
+    model = GRUModel(
+        num_features=8,    # 输入特征数
+        hidden_size=64,    # 隐藏层维度
+        num_layers=2,      # GRU层数
+    )
+    print(model)
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"Total parameters: {total_params}")

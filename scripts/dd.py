@@ -18,7 +18,11 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 ROOT = io_tools.get_root(__file__, num_returns=2)
-# print(ROOT)
-# print(__file__)
-print(pathlib.Path('dd.py'))
-print(os.stat('/home/yuki/snap/code/CryptoMamba/scripts/dd.py'))
+print(ROOT)
+print(__file__)
+print(os.path.dirname(pathlib.Path(__file__).parent.absolute()))
+print(pathlib.Path(__file__).parent.absolute())
+
+
+# print(pathlib.Path('dd.py'))
+# print(os.stat('/home/yuki/snap/code/CryptoMamba/scripts/dd.py'))

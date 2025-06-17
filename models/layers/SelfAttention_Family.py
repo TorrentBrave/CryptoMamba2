@@ -3,6 +3,10 @@ import torch.nn as nn
 import numpy as np
 from math import sqrt
 from reformer_pytorch import LSHSelfAttention
+"pip install -i https://pypi.tuna.tsinghua.edu.cn/simple reformer_pytorch"
+"pip install --use-deprecated=legacy-resolver reformer_pytorch 解决依赖太大，一起安装很多依赖导致的安装不完"
+"需要torch>=2.3, 但现在只是 2.2.2"
+"pip install --no-cache-dir --use-deprecated=legacy-resolver reformer_pytorch 能实现不缓存安装，防止一些有问题的.whl文件被缓存导致安装不成功"
 from einops import rearrange
 
 
