@@ -4,3 +4,4 @@ Predictions/
 Results/
 causal_conv1d-1.5.0.post8+cu12torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 mamba_ssm-2.2.4+cu12torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+notebooks/

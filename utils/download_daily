@@ -1,0 +1,19 @@
+import yfinance as yf
+import datetime as dt
+
+def get_data(cryptocurrency, date_start, date_end=None):
+    if date_end is None:
+        date_end = dt.datetime.now()
+
+    df = yf.download(f'{cryptocurrency}-USD', start=date_start, end=date_end)
+    # 如果是 MultiIndex 列，扁平化为单层列名
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
+        
+    return df
+
+df = get_data(cryptocurrency, date_start, date_end)
+
+
+df = pd.read_csv('../data/Daily.csv')
+df.head()
